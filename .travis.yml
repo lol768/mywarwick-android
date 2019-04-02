@@ -1,4 +1,5 @@
 language: android
+jdk: oraclejdk8
 
 android:
   components:
@@ -7,9 +8,10 @@ android:
     - extra-google-m2repository
 
 script:
-  - echo "MyWarwick.keystore=/dev/null" >> app/gradle.properties
-  - echo "MyWarwick.keyAlias=" >> app/gradle.properties
-  - echo "MyWarwick.keyPass=" >> app/gradle.properties
+  - keytool -genkey -v -keystore /tmp/keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias key -storepass changeit -dname "CN=My Warwick, OU=IT Services, O=University of Warwick, L=Coventry, ST=West Midlands, C=GB" -keypass changeit
+  - echo "MyWarwick.keystore=/tmp/keystore.jks" >> app/gradle.properties
+  - echo "MyWarwick.keyAlias=key" >> app/gradle.properties
+  - echo "MyWarwick.keyPass=changeit" >> app/gradle.properties
   - cp app/google-services.json.example app/google-services.json
   - ./gradlew build connectedCheck
 
