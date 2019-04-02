@@ -91,6 +91,7 @@ public class EventNotificationServiceTest {
                 "}";
         Event ev = (new EventFetcher(ctx, new MyWarwickPreferences(ctx, prefs, features))).buildEvent(new JSONObject(src));
         String text = this.service.getNotificationText(ev);
+        System.err.println("Got text of: " + text);
         Assert.assertEquals("CS1.04, 09:00 – 10:00", text);
     }
 }
