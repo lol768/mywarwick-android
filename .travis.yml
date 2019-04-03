@@ -13,7 +13,7 @@ script:
   - echo "MyWarwick.keyAlias=key" >> app/gradle.properties
   - echo "MyWarwick.keyPass=changeit" >> app/gradle.properties
   - cp app/google-services.json.example app/google-services.json
-  - ./gradlew build connectedCheck --debug
+  - ./gradlew build connectedCheck --info
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
